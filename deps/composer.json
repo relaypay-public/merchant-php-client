@@ -1,11 +1,5 @@
 {
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/relaypay-public/merchant-api-spec/"
-    }
-  ],
   "require": {
-    "relaypay-official/merchant-api-spec": "dev-master"
+    "relaypay-official/merchant-api-spec": "^1.0"
   }
 }
