@@ -20,11 +20,11 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/relaypay/merchant-php-client.git"
+      "url": "https://github.com/relaypay-official/merchant-php-client.git"
     }
   ],
   "require": {
-    "relaypay/merchant-php-client": "*@dev"
+    "relaypay-official/merchant-php-client": "*@dev"
   }
 }
 ```

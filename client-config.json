@@ -1,6 +1,6 @@
 {
   "invokerPackage": "RelayPay",
   "packagePath": ".",
-  "gitUserId":  "relaypay",
+  "gitUserId":  "relaypay-official",
   "gitRepoId":  "merchant-php-client"
 }
