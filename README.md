@@ -56,64 +56,84 @@ Please follow the [installation procedure](#installation--usage) and then run th
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+// Configure API key authorization: authorization
+$config = RelayPay\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = RelayPay\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
 $apiInstance = new RelayPay\Api\ECommerceApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
-$authorization = "authorization_example"; // string | Your public key
 $merchant_id = "merchant_id_example"; // string | merchantID obtained from Relaypay
 $order_id = "order_id_example"; // string | Your unique reference for this payment. i.e. id of the current shopping cart
 
 try {
-    $result = $apiInstance->getMerchantTransaction($authorization, $merchant_id, $order_id);
+    $result = $apiInstance->getMerchantTransaction($merchant_id, $order_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ECommerceApi->getMerchantTransaction: ', $e->getMessage(), PHP_EOL;
 }
 
+// Configure API key authorization: authorization
+$config = RelayPay\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = RelayPay\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
 $apiInstance = new RelayPay\Api\ECommerceApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
-$authorization = "authorization_example"; // string | Your public key
 $merchant_id = "merchant_id_example"; // string | merchantID obtained from Relaypay
 $page = 56; // int | Starts from 0
 $size = 56; // int | how many records to be returned
 
 try {
-    $result = $apiInstance->getMerchantTxs($authorization, $merchant_id, $page, $size);
+    $result = $apiInstance->getMerchantTxs($merchant_id, $page, $size);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ECommerceApi->getMerchantTxs: ', $e->getMessage(), PHP_EOL;
 }
 
+// Configure API key authorization: sign
+$config = RelayPay\Configuration::getDefaultConfiguration()->setApiKey('Sign', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = RelayPay\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Sign', 'Bearer');
+
 $apiInstance = new RelayPay\Api\ECommerceApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
-$sign = "sign_example"; // string | 
 $body = new \RelayPay\Model\EcommerceIncomingRequest(); // \RelayPay\Model\EcommerceIncomingRequest | 
 
 try {
-    $result = $apiInstance->setEcommerceRequest($sign, $body);
+    $result = $apiInstance->setEcommerceRequest($body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ECommerceApi->setEcommerceRequest: ', $e->getMessage(), PHP_EOL;
 }
 
+// Configure API key authorization: sign
+$config = RelayPay\Configuration::getDefaultConfiguration()->setApiKey('Sign', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = RelayPay\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Sign', 'Bearer');
+
 $apiInstance = new RelayPay\Api\ECommerceApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
-$sign = "sign_example"; // string | 
 $body = new \RelayPay\Model\MerchantSalesforcePlugin(); // \RelayPay\Model\MerchantSalesforcePlugin | 
 
 try {
-    $apiInstance->setEcommerceSalesforce($sign, $body);
+    $apiInstance->setEcommerceSalesforce($body);
 } catch (Exception $e) {
     echo 'Exception when calling ECommerceApi->setEcommerceSalesforce: ', $e->getMessage(), PHP_EOL;
 }
@@ -144,7 +164,18 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
- All endpoints do not require authorization.
+
+## authorization
+
+- **Type**: API key
+- **API key parameter name**: Authorization
+- **Location**: HTTP header
+
+## sign
+
+- **Type**: API key
+- **API key parameter name**: Sign
+- **Location**: HTTP header
 
 
 ## Author

@@ -91,7 +91,6 @@ class ECommerceApi
      *
      * Get merchant transaction for a given merchantId by a specified orderId
      *
-     * @param  string $authorization Your public key (required)
      * @param  string $merchant_id merchantID obtained from Relaypay (required)
      * @param  string $order_id Your unique reference for this payment. i.e. id of the current shopping cart (required)
      *
@@ -99,9 +98,9 @@ class ECommerceApi
      * @throws \InvalidArgumentException
      * @return \RelayPay\Model\EcommerceMerchantTransaction
      */
-    public function getMerchantTransaction($authorization, $merchant_id, $order_id)
+    public function getMerchantTransaction($merchant_id, $order_id)
     {
-        list($response) = $this->getMerchantTransactionWithHttpInfo($authorization, $merchant_id, $order_id);
+        list($response) = $this->getMerchantTransactionWithHttpInfo($merchant_id, $order_id);
         return $response;
     }
 
@@ -110,7 +109,6 @@ class ECommerceApi
      *
      * Get merchant transaction for a given merchantId by a specified orderId
      *
-     * @param  string $authorization Your public key (required)
      * @param  string $merchant_id merchantID obtained from Relaypay (required)
      * @param  string $order_id Your unique reference for this payment. i.e. id of the current shopping cart (required)
      *
@@ -118,10 +116,10 @@ class ECommerceApi
      * @throws \InvalidArgumentException
      * @return array of \RelayPay\Model\EcommerceMerchantTransaction, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getMerchantTransactionWithHttpInfo($authorization, $merchant_id, $order_id)
+    public function getMerchantTransactionWithHttpInfo($merchant_id, $order_id)
     {
         $returnType = '\RelayPay\Model\EcommerceMerchantTransaction';
-        $request = $this->getMerchantTransactionRequest($authorization, $merchant_id, $order_id);
+        $request = $this->getMerchantTransactionRequest($merchant_id, $order_id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -187,16 +185,15 @@ class ECommerceApi
      *
      * Get merchant transaction for a given merchantId by a specified orderId
      *
-     * @param  string $authorization Your public key (required)
      * @param  string $merchant_id merchantID obtained from Relaypay (required)
      * @param  string $order_id Your unique reference for this payment. i.e. id of the current shopping cart (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantTransactionAsync($authorization, $merchant_id, $order_id)
+    public function getMerchantTransactionAsync($merchant_id, $order_id)
     {
-        return $this->getMerchantTransactionAsyncWithHttpInfo($authorization, $merchant_id, $order_id)
+        return $this->getMerchantTransactionAsyncWithHttpInfo($merchant_id, $order_id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -209,17 +206,16 @@ class ECommerceApi
      *
      * Get merchant transaction for a given merchantId by a specified orderId
      *
-     * @param  string $authorization Your public key (required)
      * @param  string $merchant_id merchantID obtained from Relaypay (required)
      * @param  string $order_id Your unique reference for this payment. i.e. id of the current shopping cart (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantTransactionAsyncWithHttpInfo($authorization, $merchant_id, $order_id)
+    public function getMerchantTransactionAsyncWithHttpInfo($merchant_id, $order_id)
     {
         $returnType = '\RelayPay\Model\EcommerceMerchantTransaction';
-        $request = $this->getMerchantTransactionRequest($authorization, $merchant_id, $order_id);
+        $request = $this->getMerchantTransactionRequest($merchant_id, $order_id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -261,21 +257,14 @@ class ECommerceApi
     /**
      * Create request for operation 'getMerchantTransaction'
      *
-     * @param  string $authorization Your public key (required)
      * @param  string $merchant_id merchantID obtained from Relaypay (required)
      * @param  string $order_id Your unique reference for this payment. i.e. id of the current shopping cart (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getMerchantTransactionRequest($authorization, $merchant_id, $order_id)
+    protected function getMerchantTransactionRequest($merchant_id, $order_id)
     {
-        // verify the required parameter 'authorization' is set
-        if ($authorization === null || (is_array($authorization) && count($authorization) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $authorization when calling getMerchantTransaction'
-            );
-        }
         // verify the required parameter 'merchant_id' is set
         if ($merchant_id === null || (is_array($merchant_id) && count($merchant_id) === 0)) {
             throw new \InvalidArgumentException(
@@ -303,10 +292,6 @@ class ECommerceApi
         // query params
         if ($order_id !== null) {
             $queryParams['orderId'] = ObjectSerializer::toQueryValue($order_id, null);
-        }
-        // header params
-        if ($authorization !== null) {
-            $headerParams['Authorization'] = ObjectSerializer::toHeaderValue($authorization);
         }
 
 
@@ -353,6 +338,11 @@ class ECommerceApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -379,7 +369,6 @@ class ECommerceApi
      *
      * Get all bill payment transactions for the merchant
      *
-     * @param  string $authorization Your public key (required)
      * @param  string $merchant_id merchantID obtained from Relaypay (required)
      * @param  int $page Starts from 0 (required)
      * @param  int $size how many records to be returned (required)
@@ -388,9 +377,9 @@ class ECommerceApi
      * @throws \InvalidArgumentException
      * @return \RelayPay\Model\PageEcommerceMerchantTransaction
      */
-    public function getMerchantTxs($authorization, $merchant_id, $page, $size)
+    public function getMerchantTxs($merchant_id, $page, $size)
     {
-        list($response) = $this->getMerchantTxsWithHttpInfo($authorization, $merchant_id, $page, $size);
+        list($response) = $this->getMerchantTxsWithHttpInfo($merchant_id, $page, $size);
         return $response;
     }
 
@@ -399,7 +388,6 @@ class ECommerceApi
      *
      * Get all bill payment transactions for the merchant
      *
-     * @param  string $authorization Your public key (required)
      * @param  string $merchant_id merchantID obtained from Relaypay (required)
      * @param  int $page Starts from 0 (required)
      * @param  int $size how many records to be returned (required)
@@ -408,10 +396,10 @@ class ECommerceApi
      * @throws \InvalidArgumentException
      * @return array of \RelayPay\Model\PageEcommerceMerchantTransaction, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getMerchantTxsWithHttpInfo($authorization, $merchant_id, $page, $size)
+    public function getMerchantTxsWithHttpInfo($merchant_id, $page, $size)
     {
         $returnType = '\RelayPay\Model\PageEcommerceMerchantTransaction';
-        $request = $this->getMerchantTxsRequest($authorization, $merchant_id, $page, $size);
+        $request = $this->getMerchantTxsRequest($merchant_id, $page, $size);
 
         try {
             $options = $this->createHttpClientOption();
@@ -477,7 +465,6 @@ class ECommerceApi
      *
      * Get all bill payment transactions for the merchant
      *
-     * @param  string $authorization Your public key (required)
      * @param  string $merchant_id merchantID obtained from Relaypay (required)
      * @param  int $page Starts from 0 (required)
      * @param  int $size how many records to be returned (required)
@@ -485,9 +472,9 @@ class ECommerceApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantTxsAsync($authorization, $merchant_id, $page, $size)
+    public function getMerchantTxsAsync($merchant_id, $page, $size)
     {
-        return $this->getMerchantTxsAsyncWithHttpInfo($authorization, $merchant_id, $page, $size)
+        return $this->getMerchantTxsAsyncWithHttpInfo($merchant_id, $page, $size)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -500,7 +487,6 @@ class ECommerceApi
      *
      * Get all bill payment transactions for the merchant
      *
-     * @param  string $authorization Your public key (required)
      * @param  string $merchant_id merchantID obtained from Relaypay (required)
      * @param  int $page Starts from 0 (required)
      * @param  int $size how many records to be returned (required)
@@ -508,10 +494,10 @@ class ECommerceApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantTxsAsyncWithHttpInfo($authorization, $merchant_id, $page, $size)
+    public function getMerchantTxsAsyncWithHttpInfo($merchant_id, $page, $size)
     {
         $returnType = '\RelayPay\Model\PageEcommerceMerchantTransaction';
-        $request = $this->getMerchantTxsRequest($authorization, $merchant_id, $page, $size);
+        $request = $this->getMerchantTxsRequest($merchant_id, $page, $size);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -553,7 +539,6 @@ class ECommerceApi
     /**
      * Create request for operation 'getMerchantTxs'
      *
-     * @param  string $authorization Your public key (required)
      * @param  string $merchant_id merchantID obtained from Relaypay (required)
      * @param  int $page Starts from 0 (required)
      * @param  int $size how many records to be returned (required)
@@ -561,14 +546,8 @@ class ECommerceApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getMerchantTxsRequest($authorization, $merchant_id, $page, $size)
+    protected function getMerchantTxsRequest($merchant_id, $page, $size)
     {
-        // verify the required parameter 'authorization' is set
-        if ($authorization === null || (is_array($authorization) && count($authorization) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $authorization when calling getMerchantTxs'
-            );
-        }
         // verify the required parameter 'merchant_id' is set
         if ($merchant_id === null || (is_array($merchant_id) && count($merchant_id) === 0)) {
             throw new \InvalidArgumentException(
@@ -606,10 +585,6 @@ class ECommerceApi
         // query params
         if ($size !== null) {
             $queryParams['size'] = ObjectSerializer::toQueryValue($size, 'int32');
-        }
-        // header params
-        if ($authorization !== null) {
-            $headerParams['Authorization'] = ObjectSerializer::toHeaderValue($authorization);
         }
 
 
@@ -656,6 +631,11 @@ class ECommerceApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -682,16 +662,15 @@ class ECommerceApi
      *
      * Ecommerce provider pushes a transaction request. The service returns a unique url to be used for redirection.
      *
-     * @param  string $sign sign (required)
      * @param  \RelayPay\Model\EcommerceIncomingRequest $body body (optional)
      *
      * @throws \RelayPay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \RelayPay\Model\EcommerceResponse
      */
-    public function setEcommerceRequest($sign, $body = null)
+    public function setEcommerceRequest($body = null)
     {
-        list($response) = $this->setEcommerceRequestWithHttpInfo($sign, $body);
+        list($response) = $this->setEcommerceRequestWithHttpInfo($body);
         return $response;
     }
 
@@ -700,17 +679,16 @@ class ECommerceApi
      *
      * Ecommerce provider pushes a transaction request. The service returns a unique url to be used for redirection.
      *
-     * @param  string $sign (required)
      * @param  \RelayPay\Model\EcommerceIncomingRequest $body (optional)
      *
      * @throws \RelayPay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \RelayPay\Model\EcommerceResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function setEcommerceRequestWithHttpInfo($sign, $body = null)
+    public function setEcommerceRequestWithHttpInfo($body = null)
     {
         $returnType = '\RelayPay\Model\EcommerceResponse';
-        $request = $this->setEcommerceRequestRequest($sign, $body);
+        $request = $this->setEcommerceRequestRequest($body);
 
         try {
             $options = $this->createHttpClientOption();
@@ -776,15 +754,14 @@ class ECommerceApi
      *
      * Ecommerce provider pushes a transaction request. The service returns a unique url to be used for redirection.
      *
-     * @param  string $sign (required)
      * @param  \RelayPay\Model\EcommerceIncomingRequest $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setEcommerceRequestAsync($sign, $body = null)
+    public function setEcommerceRequestAsync($body = null)
     {
-        return $this->setEcommerceRequestAsyncWithHttpInfo($sign, $body)
+        return $this->setEcommerceRequestAsyncWithHttpInfo($body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -797,16 +774,15 @@ class ECommerceApi
      *
      * Ecommerce provider pushes a transaction request. The service returns a unique url to be used for redirection.
      *
-     * @param  string $sign (required)
      * @param  \RelayPay\Model\EcommerceIncomingRequest $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setEcommerceRequestAsyncWithHttpInfo($sign, $body = null)
+    public function setEcommerceRequestAsyncWithHttpInfo($body = null)
     {
         $returnType = '\RelayPay\Model\EcommerceResponse';
-        $request = $this->setEcommerceRequestRequest($sign, $body);
+        $request = $this->setEcommerceRequestRequest($body);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -848,20 +824,13 @@ class ECommerceApi
     /**
      * Create request for operation 'setEcommerceRequest'
      *
-     * @param  string $sign (required)
      * @param  \RelayPay\Model\EcommerceIncomingRequest $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function setEcommerceRequestRequest($sign, $body = null)
+    protected function setEcommerceRequestRequest($body = null)
     {
-        // verify the required parameter 'sign' is set
-        if ($sign === null || (is_array($sign) && count($sign) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $sign when calling setEcommerceRequest'
-            );
-        }
 
         $resourcePath = '/api/v1/ecommerce/request';
         $formParams = [];
@@ -870,10 +839,6 @@ class ECommerceApi
         $httpBody = '';
         $multipart = false;
 
-        // header params
-        if ($sign !== null) {
-            $headerParams['Sign'] = ObjectSerializer::toHeaderValue($sign);
-        }
 
 
         // body params
@@ -922,6 +887,11 @@ class ECommerceApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Sign');
+        if ($apiKey !== null) {
+            $headers['Sign'] = $apiKey;
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -948,16 +918,15 @@ class ECommerceApi
      *
      * Ecommerce provider pushes a Salesforce specific data for authorisation.
      *
-     * @param  string $sign sign (required)
      * @param  \RelayPay\Model\MerchantSalesforcePlugin $body body (optional)
      *
      * @throws \RelayPay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function setEcommerceSalesforce($sign, $body = null)
+    public function setEcommerceSalesforce($body = null)
     {
-        $this->setEcommerceSalesforceWithHttpInfo($sign, $body);
+        $this->setEcommerceSalesforceWithHttpInfo($body);
     }
 
     /**
@@ -965,17 +934,16 @@ class ECommerceApi
      *
      * Ecommerce provider pushes a Salesforce specific data for authorisation.
      *
-     * @param  string $sign (required)
      * @param  \RelayPay\Model\MerchantSalesforcePlugin $body (optional)
      *
      * @throws \RelayPay\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function setEcommerceSalesforceWithHttpInfo($sign, $body = null)
+    public function setEcommerceSalesforceWithHttpInfo($body = null)
     {
         $returnType = '';
-        $request = $this->setEcommerceSalesforceRequest($sign, $body);
+        $request = $this->setEcommerceSalesforceRequest($body);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1019,15 +987,14 @@ class ECommerceApi
      *
      * Ecommerce provider pushes a Salesforce specific data for authorisation.
      *
-     * @param  string $sign (required)
      * @param  \RelayPay\Model\MerchantSalesforcePlugin $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setEcommerceSalesforceAsync($sign, $body = null)
+    public function setEcommerceSalesforceAsync($body = null)
     {
-        return $this->setEcommerceSalesforceAsyncWithHttpInfo($sign, $body)
+        return $this->setEcommerceSalesforceAsyncWithHttpInfo($body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1040,16 +1007,15 @@ class ECommerceApi
      *
      * Ecommerce provider pushes a Salesforce specific data for authorisation.
      *
-     * @param  string $sign (required)
      * @param  \RelayPay\Model\MerchantSalesforcePlugin $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setEcommerceSalesforceAsyncWithHttpInfo($sign, $body = null)
+    public function setEcommerceSalesforceAsyncWithHttpInfo($body = null)
     {
         $returnType = '';
-        $request = $this->setEcommerceSalesforceRequest($sign, $body);
+        $request = $this->setEcommerceSalesforceRequest($body);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1077,20 +1043,13 @@ class ECommerceApi
     /**
      * Create request for operation 'setEcommerceSalesforce'
      *
-     * @param  string $sign (required)
      * @param  \RelayPay\Model\MerchantSalesforcePlugin $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function setEcommerceSalesforceRequest($sign, $body = null)
+    protected function setEcommerceSalesforceRequest($body = null)
     {
-        // verify the required parameter 'sign' is set
-        if ($sign === null || (is_array($sign) && count($sign) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $sign when calling setEcommerceSalesforce'
-            );
-        }
 
         $resourcePath = '/api/v1/ecommerce/salesforce';
         $formParams = [];
@@ -1099,10 +1058,6 @@ class ECommerceApi
         $httpBody = '';
         $multipart = false;
 
-        // header params
-        if ($sign !== null) {
-            $headerParams['Sign'] = ObjectSerializer::toHeaderValue($sign);
-        }
 
 
         // body params
@@ -1151,6 +1106,11 @@ class ECommerceApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Sign');
+        if ($apiKey !== null) {
+            $headers['Sign'] = $apiKey;
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {

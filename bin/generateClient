@@ -1,7 +1,7 @@
 #!/bin/bash
 cd deps
-composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+composer install --no-dev --optimize-autoloader --ignore-platform-reqs --no-cache
 cd ..
-swagger-codegen generate -i deps/vendor/relaypay/merchant-api-spec/openapi.yml -l php --c './client-config.json'
+swagger-codegen generate -i deps/vendor/relaypay-official/merchant-api-spec/openapi.yml -l php --c './client-config.json'
 cd client
 composer install --no-dev --optimize-autoloader --ignore-platform-reqs
