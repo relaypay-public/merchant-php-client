@@ -7,7 +7,7 @@
     "content-hash": "c420eeddec6bef9ec0a3987613dccd0e",
     "packages": [
         {
-            "name": "relaypay-official/merchant-api-spec",
+            "name": "relaypay-public/merchant-api-spec",
             "version": "dev-master",
             "source": {
                 "type": "git",
@@ -34,7 +34,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "relaypay-official/merchant-api-spec": 20
+        "relaypay-public/merchant-api-spec": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

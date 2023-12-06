@@ -12,7 +12,7 @@
 /**
  * RelayPay-Api-Spec
  *
- * Relay Pay API documentation. Use `sandbox-api.relaypay.io` for Sandbox environment and `api.relaypay.io` for production.  Some useful links: - [Official docs](https://relaypay-merchant.readme.io/reference/merchant-native-integration)
+ * Relay Pay API documentation. Use `api.sandbox.relaypay.io` for Sandbox environment and `api.relaypay.io` for production.  Some useful links: - [Official docs](https://relaypay-merchant.readme.io/reference/merchant-native-integration)
  *
  * OpenAPI spec version: 0.0.2
  * Contact: support@relaypay.io
