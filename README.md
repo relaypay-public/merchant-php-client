@@ -142,7 +142,7 @@ try {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://{environment}.relaypay.io/api/v1*
+All URIs are relative to *https://{environment}.relaypay.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

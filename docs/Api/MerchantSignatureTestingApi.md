@@ -1,6 +1,6 @@
 # RelayPay\MerchantSignatureTestingApi
 
-All URIs are relative to *https://{environment}.relaypay.io/api/v1*
+All URIs are relative to *https://{environment}.relaypay.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

@@ -80,7 +80,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://{environment}.relaypay.io/api/v1';
+    protected $host = 'https://{environment}.relaypay.io';
 
     /**
      * User agent of the HTTP request, set to "PHP-Swagger" by default
