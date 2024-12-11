@@ -1,14 +1,14 @@
-# MerchantSalesforcePlugin
+# # MerchantSalesforcePlugin
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**merchant_id** | **string** | merchantID obtained from Relaypay | [optional] 
-**issuer** | **string** | Salesforce OAuth specific | [optional] 
-**subject** | **string** | Salesforce OAuth specific | [optional] 
-**audience** | **string** | Salesforce OAuth specific | [optional] 
-**url** | **string** | Salesforce OAuth login url | [optional] 
-**private_key** | **string** | privateKey exported from Salesforce | [optional] 
+**merchant_id** | **string** |  | [optional]
+**issuer** | **string** |  | [optional]
+**subject** | **string** |  | [optional]
+**audience** | **string** |  | [optional]
+**url** | **string** |  | [optional]
+**private_key** | **string** |  | [optional]
 
-[[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
-
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

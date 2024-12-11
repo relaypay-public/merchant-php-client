@@ -1,6 +1,6 @@
 <?php
 /**
- * PageEcommerceMerchantTransaction
+ * SortObject
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \RelayPay\ObjectSerializer;
 
 /**
- * PageEcommerceMerchantTransaction Class Doc Comment
+ * SortObject Class Doc Comment
  *
  * @category Class
  * @package  RelayPay
@@ -41,7 +41,7 @@ use \RelayPay\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \JsonSerializable
+class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PageEcommerceMerchantTransaction';
+    protected static $openAPIModelName = 'SortObject';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,17 +58,9 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'total_elements' => 'int',
-        'total_pages' => 'int',
-        'size' => 'int',
-        'content' => '\RelayPay\Model\EcommerceMerchantTransaction[]',
-        'number' => 'int',
-        'sort' => '\RelayPay\Model\SortObject',
-        'first' => 'bool',
-        'last' => 'bool',
-        'number_of_elements' => 'int',
-        'pageable' => '\RelayPay\Model\Pageable',
-        'empty' => 'bool'
+        'empty' => 'bool',
+        'unsorted' => 'bool',
+        'sorted' => 'bool'
     ];
 
     /**
@@ -79,17 +71,9 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'total_elements' => 'int64',
-        'total_pages' => 'int32',
-        'size' => 'int32',
-        'content' => null,
-        'number' => 'int32',
-        'sort' => null,
-        'first' => null,
-        'last' => null,
-        'number_of_elements' => 'int32',
-        'pageable' => null,
-        'empty' => null
+        'empty' => null,
+        'unsorted' => null,
+        'sorted' => null
     ];
 
     /**
@@ -98,17 +82,9 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'total_elements' => false,
-        'total_pages' => false,
-        'size' => false,
-        'content' => false,
-        'number' => false,
-        'sort' => false,
-        'first' => false,
-        'last' => false,
-        'number_of_elements' => false,
-        'pageable' => false,
-        'empty' => false
+        'empty' => false,
+        'unsorted' => false,
+        'sorted' => false
     ];
 
     /**
@@ -197,17 +173,9 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'total_elements' => 'totalElements',
-        'total_pages' => 'totalPages',
-        'size' => 'size',
-        'content' => 'content',
-        'number' => 'number',
-        'sort' => 'sort',
-        'first' => 'first',
-        'last' => 'last',
-        'number_of_elements' => 'numberOfElements',
-        'pageable' => 'pageable',
-        'empty' => 'empty'
+        'empty' => 'empty',
+        'unsorted' => 'unsorted',
+        'sorted' => 'sorted'
     ];
 
     /**
@@ -216,17 +184,9 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'total_elements' => 'setTotalElements',
-        'total_pages' => 'setTotalPages',
-        'size' => 'setSize',
-        'content' => 'setContent',
-        'number' => 'setNumber',
-        'sort' => 'setSort',
-        'first' => 'setFirst',
-        'last' => 'setLast',
-        'number_of_elements' => 'setNumberOfElements',
-        'pageable' => 'setPageable',
-        'empty' => 'setEmpty'
+        'empty' => 'setEmpty',
+        'unsorted' => 'setUnsorted',
+        'sorted' => 'setSorted'
     ];
 
     /**
@@ -235,17 +195,9 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'total_elements' => 'getTotalElements',
-        'total_pages' => 'getTotalPages',
-        'size' => 'getSize',
-        'content' => 'getContent',
-        'number' => 'getNumber',
-        'sort' => 'getSort',
-        'first' => 'getFirst',
-        'last' => 'getLast',
-        'number_of_elements' => 'getNumberOfElements',
-        'pageable' => 'getPageable',
-        'empty' => 'getEmpty'
+        'empty' => 'getEmpty',
+        'unsorted' => 'getUnsorted',
+        'sorted' => 'getSorted'
     ];
 
     /**
@@ -305,17 +257,9 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('total_elements', $data ?? [], null);
-        $this->setIfExists('total_pages', $data ?? [], null);
-        $this->setIfExists('size', $data ?? [], null);
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('number', $data ?? [], null);
-        $this->setIfExists('sort', $data ?? [], null);
-        $this->setIfExists('first', $data ?? [], null);
-        $this->setIfExists('last', $data ?? [], null);
-        $this->setIfExists('number_of_elements', $data ?? [], null);
-        $this->setIfExists('pageable', $data ?? [], null);
         $this->setIfExists('empty', $data ?? [], null);
+        $this->setIfExists('unsorted', $data ?? [], null);
+        $this->setIfExists('sorted', $data ?? [], null);
     }
 
     /**
@@ -361,276 +305,6 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
 
 
     /**
-     * Gets total_elements
-     *
-     * @return int|null
-     */
-    public function getTotalElements()
-    {
-        return $this->container['total_elements'];
-    }
-
-    /**
-     * Sets total_elements
-     *
-     * @param int|null $total_elements total_elements
-     *
-     * @return self
-     */
-    public function setTotalElements($total_elements)
-    {
-        if (is_null($total_elements)) {
-            throw new \InvalidArgumentException('non-nullable total_elements cannot be null');
-        }
-        $this->container['total_elements'] = $total_elements;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_pages
-     *
-     * @return int|null
-     */
-    public function getTotalPages()
-    {
-        return $this->container['total_pages'];
-    }
-
-    /**
-     * Sets total_pages
-     *
-     * @param int|null $total_pages total_pages
-     *
-     * @return self
-     */
-    public function setTotalPages($total_pages)
-    {
-        if (is_null($total_pages)) {
-            throw new \InvalidArgumentException('non-nullable total_pages cannot be null');
-        }
-        $this->container['total_pages'] = $total_pages;
-
-        return $this;
-    }
-
-    /**
-     * Gets size
-     *
-     * @return int|null
-     */
-    public function getSize()
-    {
-        return $this->container['size'];
-    }
-
-    /**
-     * Sets size
-     *
-     * @param int|null $size size
-     *
-     * @return self
-     */
-    public function setSize($size)
-    {
-        if (is_null($size)) {
-            throw new \InvalidArgumentException('non-nullable size cannot be null');
-        }
-        $this->container['size'] = $size;
-
-        return $this;
-    }
-
-    /**
-     * Gets content
-     *
-     * @return \RelayPay\Model\EcommerceMerchantTransaction[]|null
-     */
-    public function getContent()
-    {
-        return $this->container['content'];
-    }
-
-    /**
-     * Sets content
-     *
-     * @param \RelayPay\Model\EcommerceMerchantTransaction[]|null $content content
-     *
-     * @return self
-     */
-    public function setContent($content)
-    {
-        if (is_null($content)) {
-            throw new \InvalidArgumentException('non-nullable content cannot be null');
-        }
-        $this->container['content'] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Gets number
-     *
-     * @return int|null
-     */
-    public function getNumber()
-    {
-        return $this->container['number'];
-    }
-
-    /**
-     * Sets number
-     *
-     * @param int|null $number number
-     *
-     * @return self
-     */
-    public function setNumber($number)
-    {
-        if (is_null($number)) {
-            throw new \InvalidArgumentException('non-nullable number cannot be null');
-        }
-        $this->container['number'] = $number;
-
-        return $this;
-    }
-
-    /**
-     * Gets sort
-     *
-     * @return \RelayPay\Model\SortObject|null
-     */
-    public function getSort()
-    {
-        return $this->container['sort'];
-    }
-
-    /**
-     * Sets sort
-     *
-     * @param \RelayPay\Model\SortObject|null $sort sort
-     *
-     * @return self
-     */
-    public function setSort($sort)
-    {
-        if (is_null($sort)) {
-            throw new \InvalidArgumentException('non-nullable sort cannot be null');
-        }
-        $this->container['sort'] = $sort;
-
-        return $this;
-    }
-
-    /**
-     * Gets first
-     *
-     * @return bool|null
-     */
-    public function getFirst()
-    {
-        return $this->container['first'];
-    }
-
-    /**
-     * Sets first
-     *
-     * @param bool|null $first first
-     *
-     * @return self
-     */
-    public function setFirst($first)
-    {
-        if (is_null($first)) {
-            throw new \InvalidArgumentException('non-nullable first cannot be null');
-        }
-        $this->container['first'] = $first;
-
-        return $this;
-    }
-
-    /**
-     * Gets last
-     *
-     * @return bool|null
-     */
-    public function getLast()
-    {
-        return $this->container['last'];
-    }
-
-    /**
-     * Sets last
-     *
-     * @param bool|null $last last
-     *
-     * @return self
-     */
-    public function setLast($last)
-    {
-        if (is_null($last)) {
-            throw new \InvalidArgumentException('non-nullable last cannot be null');
-        }
-        $this->container['last'] = $last;
-
-        return $this;
-    }
-
-    /**
-     * Gets number_of_elements
-     *
-     * @return int|null
-     */
-    public function getNumberOfElements()
-    {
-        return $this->container['number_of_elements'];
-    }
-
-    /**
-     * Sets number_of_elements
-     *
-     * @param int|null $number_of_elements number_of_elements
-     *
-     * @return self
-     */
-    public function setNumberOfElements($number_of_elements)
-    {
-        if (is_null($number_of_elements)) {
-            throw new \InvalidArgumentException('non-nullable number_of_elements cannot be null');
-        }
-        $this->container['number_of_elements'] = $number_of_elements;
-
-        return $this;
-    }
-
-    /**
-     * Gets pageable
-     *
-     * @return \RelayPay\Model\Pageable|null
-     */
-    public function getPageable()
-    {
-        return $this->container['pageable'];
-    }
-
-    /**
-     * Sets pageable
-     *
-     * @param \RelayPay\Model\Pageable|null $pageable pageable
-     *
-     * @return self
-     */
-    public function setPageable($pageable)
-    {
-        if (is_null($pageable)) {
-            throw new \InvalidArgumentException('non-nullable pageable cannot be null');
-        }
-        $this->container['pageable'] = $pageable;
-
-        return $this;
-    }
-
-    /**
      * Gets empty
      *
      * @return bool|null
@@ -653,6 +327,60 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
             throw new \InvalidArgumentException('non-nullable empty cannot be null');
         }
         $this->container['empty'] = $empty;
+
+        return $this;
+    }
+
+    /**
+     * Gets unsorted
+     *
+     * @return bool|null
+     */
+    public function getUnsorted()
+    {
+        return $this->container['unsorted'];
+    }
+
+    /**
+     * Sets unsorted
+     *
+     * @param bool|null $unsorted unsorted
+     *
+     * @return self
+     */
+    public function setUnsorted($unsorted)
+    {
+        if (is_null($unsorted)) {
+            throw new \InvalidArgumentException('non-nullable unsorted cannot be null');
+        }
+        $this->container['unsorted'] = $unsorted;
+
+        return $this;
+    }
+
+    /**
+     * Gets sorted
+     *
+     * @return bool|null
+     */
+    public function getSorted()
+    {
+        return $this->container['sorted'];
+    }
+
+    /**
+     * Sets sorted
+     *
+     * @param bool|null $sorted sorted
+     *
+     * @return self
+     */
+    public function setSorted($sorted)
+    {
+        if (is_null($sorted)) {
+            throw new \InvalidArgumentException('non-nullable sorted cannot be null');
+        }
+        $this->container['sorted'] = $sorted;
 
         return $this;
     }

@@ -1,0 +1,882 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "RelayPay API",
+    "description": "Documentation RelayPay API v2.0.0",
+    "contact": {
+      "name": "Danny Allen",
+      "email": "danny@relaypay.io"
+    },
+    "version": "2.0.0"
+  },
+  "externalDocs": {
+    "description": "Web site",
+    "url": "https://relaypay.io"
+  },
+  "servers": [
+    {
+      "url": "https://api.sandbox.relaypay.io/api",
+      "description": "Sandbox testing"
+    },
+    {
+      "url": "https://api.relaypay.io/api",
+      "description": "Relaypay production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Merchant Signature Testing",
+      "description": "Works in sandbox environment only"
+    },
+    {
+      "name": "E-Commerce",
+      "description": "E-Commerce API endpoints"
+    }
+  ],
+  "paths": {
+    "/merchant/generate-sign": {
+      "post": {
+        "tags": [
+          "Merchant Signature Testing"
+        ],
+        "summary": "Testing header signature generation.",
+        "description": "Not to be used in the actual merchant implementation. This method is a convenience for a developer to verify that his sign function generates the same header as we do.",
+        "operationId": "generateSign",
+        "parameters": [
+          {
+            "name": "privateKey",
+            "in": "query",
+            "description": "Your private(secret) key from Relaypay",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/e-commerce/verify-signature": {
+      "post": {
+        "tags": [
+          "Merchant Signature Testing"
+        ],
+        "summary": "Ecommerce provider verifies signed request.",
+        "description": "Use this endpoint to verify a request signature. Authorization field requires your public key. The service return ok if the request has been verified.",
+        "operationId": "verifyEcommerceApiKeys",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-merchant-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-api-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorised Request"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/e-commerce/salesforce": {
+      "post": {
+        "tags": [
+          "E-Commerce"
+        ],
+        "summary": "Ecommerce provider pushes a Salesforce specific data for authorisation.",
+        "description": "Use this endpoint to update Salesforce private key",
+        "operationId": "setEcommerceSalesforce",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-merchant-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-api-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MerchantSalesforcePlugin"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorised Request"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/e-commerce/request": {
+      "post": {
+        "tags": [
+          "E-Commerce"
+        ],
+        "summary": "Ecommerce provider sends a transaction request.",
+        "description": "Use this endpoint to create a payment request. The service returns a unique url to be used for redirection.",
+        "operationId": "setEcommerceRequest",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-merchant-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-api-signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EcommerceIncomingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorised Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceResponse"
+                }
+              }
+            }
+          }
+        },
+        "callbacks": {
+          "webhook": {
+            "http://<url defined by the merchant>": {
+              "post": {
+                "description": "webhook with a merchant transaction status update",
+                "parameters": [
+                  {
+                    "name": "x-api-signature",
+                    "in": "header",
+                    "description": "SHA 256 signature of the payload sent.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                            "type": "string"
+                            }
+                        }
+                    }
+                  },
+                  {
+                    "name": "Authorisation",
+                    "in": "header",
+                    "description": "Authorisation string supplied by the e-commerce request (optional) or in the case of salesforce integration the salesforce security token is provided",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                ],
+                "requestBody": {
+                  "description": "E-commerce Payment Update Body",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/EcommerceMerchantTransaction"
+                      }
+                    }
+                  },
+                  "required": true
+                },
+                "responses": {
+                  "200": {
+                    "description": "Return this code if the callback was received and processed successfully"
+                  },
+                  "default": {
+                    "description": "All other response codes will cause retry mechanism to send this webhook again with 2, 5, 20 and 50 minutes delay."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/e-commerce/transaction": {
+      "get": {
+        "tags": [
+          "E-Commerce"
+        ],
+        "summary": "Get merchant transaction by a specified orderId",
+        "description": "Use this endpoint to retrieve merchant transaction by orderId",
+        "operationId": "getMerchantTransaction",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-merchant-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceMerchantTransaction"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorised Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceMerchantTransaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceMerchantTransaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/e-commerce/transaction/webhooks": {
+      "get": {
+        "tags": [
+          "E-Commerce"
+        ],
+        "summary": "Get merchant webhook logs in date range",
+        "description": "Use this endpoint to retrieve merchant webhook logs in date range for merchant",
+        "operationId": "getMerchantWebhookLogs",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-merchant-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MerchantWebhookLog"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorised Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MerchantWebhookLog"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MerchantWebhookLog"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/e-commerce/transaction/history": {
+      "get": {
+        "tags": [
+          "E-Commerce"
+        ],
+        "summary": "Get all bill payment transactions for the merchant",
+        "description": "Use this endpoint to retrieve transaction history",
+        "operationId": "getMerchantTxs",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-merchant-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageEcommerceMerchantTransaction"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorised Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageEcommerceMerchantTransaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageEcommerceMerchantTransaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MerchantSalesforcePlugin": {
+        "type": "object",
+        "properties": {
+          "merchantId": {
+            "type": "string"
+          },
+          "issuer": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "audience": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "privateKey": {
+            "type": "string"
+          }
+        }
+      },
+      "EcommerceIncomingRequest": {
+        "required": [
+          "callbackUrlRedirect"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "example": 5.0
+          },
+          "customerName": {
+            "type": "string",
+            "example": "Jacob"
+          },
+          "customerEmail": {
+            "type": "string",
+            "example": "info@gmail.com"
+          },
+          "storeName": {
+            "type": "string",
+            "example": "relayPay"
+          },
+          "currency": {
+            "type": "string",
+            "example": "AUD"
+          },
+          "orderId": {
+            "type": "string"
+          },
+          "callbackUrlRedirect": {
+            "type": "string",
+            "description": "Where to redirect once the payment is pending or cancelled. If this value is provided it'll override the general settings."
+          },
+          "callbackCancelUrlRedirect": {
+            "type": "string",
+            "description": "Where to redirect once the payment is cancelled. If this value is not provided callbackUrlRedirect will be used"
+          },
+          "webHookUrl": {
+            "type": "string",
+            "description": "Where to post updates about a payment. These will be posted with every payment change. This callback is guaranteed to happen before we redirect the user back. If this value is provided it'll override the general settings. If not provide at all - webhook will not send"
+          },
+          "securityToken": {
+            "type": "string",
+            "description": "This token will be sent back with the callback in Authorization header. (Authorization:  [type] [credentials]  (e.x Basic Rjc1234567890jdGMS67890U78...)) When creating the token, both 'type' and 'credentials' are required."
+          }
+        },
+        "description": "E-commerce Transaction Request"
+      },
+      "EcommerceResponse": {
+        "type": "object",
+        "properties": {
+          "redirectionUrl": {
+            "type": "string",
+            "description": "Redirect to this URL for payment. The token in the url is a unique identifier of the registered order details."
+          }
+        },
+        "description": "E-commerce Transaction Response"
+      },
+      "EcommerceMerchantTransaction": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "orderStatus": {
+            "type": "string",
+            "enum": [
+              "Cancelled",
+              "Success",
+              "Failed",
+              "Pending"
+            ]
+          },
+          "customerEmail": {
+            "type": "string"
+          },
+          "customerName": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "GBP",
+              "EUR",
+              "AUD",
+              "AED",
+              "CAD",
+              "CHF",
+              "CNY",
+              "HKD",
+              "INR",
+              "JPY",
+              "NZD",
+              "PHP",
+              "SEK",
+              "SGD",
+              "THB",
+              "TRY",
+              "ZAR",
+              "BGN",
+              "BRL",
+              "COP",
+              "CZK",
+              "DKK",
+              "DOP",
+              "EGP",
+              "HRK",
+              "IDR",
+              "ILS",
+              "JOD",
+              "KES",
+              "KRW",
+              "KWD",
+              "LKR",
+              "MAD",
+              "MXN",
+              "MYR",
+              "NGN",
+              "NOK",
+              "OMR",
+              "PEN",
+              "PKR",
+              "PLN",
+              "RON",
+              "RUB",
+              "TWD",
+              "VND"
+            ]
+          },
+          "cryptoAmount": {
+            "type": "number"
+          },
+          "cryptoCurrency": {
+            "type": "string",
+            "enum": [
+              "ETH",
+              "BTC",
+              "USDT",
+              "USDC",
+              "DAI",
+              "SOL",
+              "BNB",
+              "AVAX",
+              "OP",
+              "POL",
+              "TRX",
+              "LINK",
+              "UNI",
+              "APE",
+              "DOGE",
+              "LTC",
+              "XRP",
+              "XLM"
+            ]
+          },
+          "blockchainHash": {
+            "type": "string"
+          },
+          "merchantId": {
+            "type": "string"
+          }
+        },
+        "description": "E-commerce Payment Update Info"
+      },
+      "MerchantWebhookLog": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "merchantId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "jsonRequest": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "responseStatusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "responseReasonPhrase": {
+            "type": "string"
+          },
+          "responseMessage": {
+            "type": "string"
+          }
+        },
+        "description": "E-commerce webhook log"
+      },
+      "Pageable": {
+        "type": "object",
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paged": {
+            "type": "boolean"
+          },
+          "unpaged": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SortObject": {
+        "type": "object",
+        "properties": {
+          "empty": {
+            "type": "boolean"
+          },
+          "unsorted": {
+            "type": "boolean"
+          },
+          "sorted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PageEcommerceMerchantTransaction": {
+        "type": "object",
+        "properties": {
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcommerceMerchantTransaction"
+            }
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "authorization": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
