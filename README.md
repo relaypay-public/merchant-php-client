@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
 - [MerchantSalesforcePlugin](docs/Model/MerchantSalesforcePlugin.md)
 - [MerchantWebhookLog](docs/Model/MerchantWebhookLog.md)
 - [PageEcommerceMerchantTransaction](docs/Model/PageEcommerceMerchantTransaction.md)
+- [PageMerchantWebhookLog](docs/Model/PageMerchantWebhookLog.md)
 - [Pageable](docs/Model/Pageable.md)
 - [SortObject](docs/Model/SortObject.md)
 

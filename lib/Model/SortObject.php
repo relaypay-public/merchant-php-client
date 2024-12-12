@@ -59,8 +59,8 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'empty' => 'bool',
-        'unsorted' => 'bool',
-        'sorted' => 'bool'
+        'sorted' => 'bool',
+        'unsorted' => 'bool'
     ];
 
     /**
@@ -72,8 +72,8 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'empty' => null,
-        'unsorted' => null,
-        'sorted' => null
+        'sorted' => null,
+        'unsorted' => null
     ];
 
     /**
@@ -83,8 +83,8 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'empty' => false,
-        'unsorted' => false,
-        'sorted' => false
+        'sorted' => false,
+        'unsorted' => false
     ];
 
     /**
@@ -174,8 +174,8 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'empty' => 'empty',
-        'unsorted' => 'unsorted',
-        'sorted' => 'sorted'
+        'sorted' => 'sorted',
+        'unsorted' => 'unsorted'
     ];
 
     /**
@@ -185,8 +185,8 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'empty' => 'setEmpty',
-        'unsorted' => 'setUnsorted',
-        'sorted' => 'setSorted'
+        'sorted' => 'setSorted',
+        'unsorted' => 'setUnsorted'
     ];
 
     /**
@@ -196,8 +196,8 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'empty' => 'getEmpty',
-        'unsorted' => 'getUnsorted',
-        'sorted' => 'getSorted'
+        'sorted' => 'getSorted',
+        'unsorted' => 'getUnsorted'
     ];
 
     /**
@@ -258,8 +258,8 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('empty', $data ?? [], null);
-        $this->setIfExists('unsorted', $data ?? [], null);
         $this->setIfExists('sorted', $data ?? [], null);
+        $this->setIfExists('unsorted', $data ?? [], null);
     }
 
     /**
@@ -332,33 +332,6 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets unsorted
-     *
-     * @return bool|null
-     */
-    public function getUnsorted()
-    {
-        return $this->container['unsorted'];
-    }
-
-    /**
-     * Sets unsorted
-     *
-     * @param bool|null $unsorted unsorted
-     *
-     * @return self
-     */
-    public function setUnsorted($unsorted)
-    {
-        if (is_null($unsorted)) {
-            throw new \InvalidArgumentException('non-nullable unsorted cannot be null');
-        }
-        $this->container['unsorted'] = $unsorted;
-
-        return $this;
-    }
-
-    /**
      * Gets sorted
      *
      * @return bool|null
@@ -381,6 +354,33 @@ class SortObject implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable sorted cannot be null');
         }
         $this->container['sorted'] = $sorted;
+
+        return $this;
+    }
+
+    /**
+     * Gets unsorted
+     *
+     * @return bool|null
+     */
+    public function getUnsorted()
+    {
+        return $this->container['unsorted'];
+    }
+
+    /**
+     * Sets unsorted
+     *
+     * @param bool|null $unsorted unsorted
+     *
+     * @return self
+     */
+    public function setUnsorted($unsorted)
+    {
+        if (is_null($unsorted)) {
+            throw new \InvalidArgumentException('non-nullable unsorted cannot be null');
+        }
+        $this->container['unsorted'] = $unsorted;
 
         return $this;
     }

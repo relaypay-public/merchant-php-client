@@ -74,7 +74,7 @@ No authorization required
 ## `getMerchantTxs()`
 
 ```php
-getMerchantTxs($x_api_key, $x_merchant_id, $pageable): \RelayPay\Model\PageEcommerceMerchantTransaction
+getMerchantTxs($x_api_key, $x_merchant_id, $page, $size, $sort): \RelayPay\Model\PageEcommerceMerchantTransaction
 ```
 
 Get all bill payment transactions for the merchant
@@ -96,10 +96,12 @@ $apiInstance = new RelayPay\Api\ECommerceApi(
 );
 $x_api_key = 'x_api_key_example'; // string
 $x_merchant_id = 'x_merchant_id_example'; // string
-$pageable = new \RelayPay\Model\\RelayPay\Model\Pageable(); // \RelayPay\Model\Pageable
+$page = '0'; // string
+$size = '20'; // string
+$sort = 'created:desc'; // string
 
 try {
-    $result = $apiInstance->getMerchantTxs($x_api_key, $x_merchant_id, $pageable);
+    $result = $apiInstance->getMerchantTxs($x_api_key, $x_merchant_id, $page, $size, $sort);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ECommerceApi->getMerchantTxs: ', $e->getMessage(), PHP_EOL;
@@ -112,7 +114,9 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **x_api_key** | **string**|  | |
 | **x_merchant_id** | **string**|  | |
-| **pageable** | [**\RelayPay\Model\Pageable**](../Model/.md)|  | |
+| **page** | **string**|  | [optional] [default to &#39;0&#39;] |
+| **size** | **string**|  | [optional] [default to &#39;20&#39;] |
+| **sort** | **string**|  | [optional] [default to &#39;created:desc&#39;] |
 
 ### Return type
 
@@ -134,7 +138,7 @@ No authorization required
 ## `getMerchantWebhookLogs()`
 
 ```php
-getMerchantWebhookLogs($x_api_key, $x_merchant_id, $start_date, $end_date): \RelayPay\Model\MerchantWebhookLog[]
+getMerchantWebhookLogs($x_api_key, $x_merchant_id, $start_date, $end_date, $page, $size, $sort): \RelayPay\Model\PageMerchantWebhookLog
 ```
 
 Get merchant webhook logs in date range
@@ -158,9 +162,12 @@ $x_api_key = 'x_api_key_example'; // string
 $x_merchant_id = 'x_merchant_id_example'; // string
 $start_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
 $end_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
+$page = '0'; // string
+$size = '20'; // string
+$sort = 'created:desc'; // string
 
 try {
-    $result = $apiInstance->getMerchantWebhookLogs($x_api_key, $x_merchant_id, $start_date, $end_date);
+    $result = $apiInstance->getMerchantWebhookLogs($x_api_key, $x_merchant_id, $start_date, $end_date, $page, $size, $sort);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ECommerceApi->getMerchantWebhookLogs: ', $e->getMessage(), PHP_EOL;
@@ -175,10 +182,13 @@ try {
 | **x_merchant_id** | **string**|  | |
 | **start_date** | **\DateTime**|  | |
 | **end_date** | **\DateTime**|  | |
+| **page** | **string**|  | [optional] [default to &#39;0&#39;] |
+| **size** | **string**|  | [optional] [default to &#39;20&#39;] |
+| **sort** | **string**|  | [optional] [default to &#39;created:desc&#39;] |
 
 ### Return type
 
-[**\RelayPay\Model\MerchantWebhookLog[]**](../Model/MerchantWebhookLog.md)
+[**\RelayPay\Model\PageMerchantWebhookLog**](../Model/PageMerchantWebhookLog.md)
 
 ### Authorization
 

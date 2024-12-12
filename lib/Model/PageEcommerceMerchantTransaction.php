@@ -64,10 +64,10 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => '\RelayPay\Model\EcommerceMerchantTransaction[]',
         'number' => 'int',
         'sort' => '\RelayPay\Model\SortObject',
-        'first' => 'bool',
-        'last' => 'bool',
         'number_of_elements' => 'int',
         'pageable' => '\RelayPay\Model\Pageable',
+        'first' => 'bool',
+        'last' => 'bool',
         'empty' => 'bool'
     ];
 
@@ -85,10 +85,10 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => null,
         'number' => 'int32',
         'sort' => null,
-        'first' => null,
-        'last' => null,
         'number_of_elements' => 'int32',
         'pageable' => null,
+        'first' => null,
+        'last' => null,
         'empty' => null
     ];
 
@@ -104,10 +104,10 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => false,
         'number' => false,
         'sort' => false,
-        'first' => false,
-        'last' => false,
         'number_of_elements' => false,
         'pageable' => false,
+        'first' => false,
+        'last' => false,
         'empty' => false
     ];
 
@@ -203,10 +203,10 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => 'content',
         'number' => 'number',
         'sort' => 'sort',
-        'first' => 'first',
-        'last' => 'last',
         'number_of_elements' => 'numberOfElements',
         'pageable' => 'pageable',
+        'first' => 'first',
+        'last' => 'last',
         'empty' => 'empty'
     ];
 
@@ -222,10 +222,10 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => 'setContent',
         'number' => 'setNumber',
         'sort' => 'setSort',
-        'first' => 'setFirst',
-        'last' => 'setLast',
         'number_of_elements' => 'setNumberOfElements',
         'pageable' => 'setPageable',
+        'first' => 'setFirst',
+        'last' => 'setLast',
         'empty' => 'setEmpty'
     ];
 
@@ -241,10 +241,10 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => 'getContent',
         'number' => 'getNumber',
         'sort' => 'getSort',
-        'first' => 'getFirst',
-        'last' => 'getLast',
         'number_of_elements' => 'getNumberOfElements',
         'pageable' => 'getPageable',
+        'first' => 'getFirst',
+        'last' => 'getLast',
         'empty' => 'getEmpty'
     ];
 
@@ -311,10 +311,10 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         $this->setIfExists('content', $data ?? [], null);
         $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('sort', $data ?? [], null);
-        $this->setIfExists('first', $data ?? [], null);
-        $this->setIfExists('last', $data ?? [], null);
         $this->setIfExists('number_of_elements', $data ?? [], null);
         $this->setIfExists('pageable', $data ?? [], null);
+        $this->setIfExists('first', $data ?? [], null);
+        $this->setIfExists('last', $data ?? [], null);
         $this->setIfExists('empty', $data ?? [], null);
     }
 
@@ -523,60 +523,6 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
     }
 
     /**
-     * Gets first
-     *
-     * @return bool|null
-     */
-    public function getFirst()
-    {
-        return $this->container['first'];
-    }
-
-    /**
-     * Sets first
-     *
-     * @param bool|null $first first
-     *
-     * @return self
-     */
-    public function setFirst($first)
-    {
-        if (is_null($first)) {
-            throw new \InvalidArgumentException('non-nullable first cannot be null');
-        }
-        $this->container['first'] = $first;
-
-        return $this;
-    }
-
-    /**
-     * Gets last
-     *
-     * @return bool|null
-     */
-    public function getLast()
-    {
-        return $this->container['last'];
-    }
-
-    /**
-     * Sets last
-     *
-     * @param bool|null $last last
-     *
-     * @return self
-     */
-    public function setLast($last)
-    {
-        if (is_null($last)) {
-            throw new \InvalidArgumentException('non-nullable last cannot be null');
-        }
-        $this->container['last'] = $last;
-
-        return $this;
-    }
-
-    /**
      * Gets number_of_elements
      *
      * @return int|null
@@ -626,6 +572,60 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
             throw new \InvalidArgumentException('non-nullable pageable cannot be null');
         }
         $this->container['pageable'] = $pageable;
+
+        return $this;
+    }
+
+    /**
+     * Gets first
+     *
+     * @return bool|null
+     */
+    public function getFirst()
+    {
+        return $this->container['first'];
+    }
+
+    /**
+     * Sets first
+     *
+     * @param bool|null $first first
+     *
+     * @return self
+     */
+    public function setFirst($first)
+    {
+        if (is_null($first)) {
+            throw new \InvalidArgumentException('non-nullable first cannot be null');
+        }
+        $this->container['first'] = $first;
+
+        return $this;
+    }
+
+    /**
+     * Gets last
+     *
+     * @return bool|null
+     */
+    public function getLast()
+    {
+        return $this->container['last'];
+    }
+
+    /**
+     * Sets last
+     *
+     * @param bool|null $last last
+     *
+     * @return self
+     */
+    public function setLast($last)
+    {
+        if (is_null($last)) {
+            throw new \InvalidArgumentException('non-nullable last cannot be null');
+        }
+        $this->container['last'] = $last;
 
         return $this;
     }

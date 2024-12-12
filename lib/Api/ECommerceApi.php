@@ -553,16 +553,18 @@ class ECommerceApi
      *
      * @param  string $x_api_key x_api_key (required)
      * @param  string $x_merchant_id x_merchant_id (required)
-     * @param  \RelayPay\Model\Pageable $pageable pageable (required)
+     * @param  string $page page (optional, default to '0')
+     * @param  string $size size (optional, default to '20')
+     * @param  string $sort sort (optional, default to 'created:desc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantTxs'] to see the possible values for this operation
      *
      * @throws \RelayPay\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \RelayPay\Model\PageEcommerceMerchantTransaction|\RelayPay\Model\PageEcommerceMerchantTransaction|\RelayPay\Model\PageEcommerceMerchantTransaction
      */
-    public function getMerchantTxs($x_api_key, $x_merchant_id, $pageable, string $contentType = self::contentTypes['getMerchantTxs'][0])
+    public function getMerchantTxs($x_api_key, $x_merchant_id, $page = '0', $size = '20', $sort = 'created:desc', string $contentType = self::contentTypes['getMerchantTxs'][0])
     {
-        list($response) = $this->getMerchantTxsWithHttpInfo($x_api_key, $x_merchant_id, $pageable, $contentType);
+        list($response) = $this->getMerchantTxsWithHttpInfo($x_api_key, $x_merchant_id, $page, $size, $sort, $contentType);
         return $response;
     }
 
@@ -573,16 +575,18 @@ class ECommerceApi
      *
      * @param  string $x_api_key (required)
      * @param  string $x_merchant_id (required)
-     * @param  \RelayPay\Model\Pageable $pageable (required)
+     * @param  string $page (optional, default to '0')
+     * @param  string $size (optional, default to '20')
+     * @param  string $sort (optional, default to 'created:desc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantTxs'] to see the possible values for this operation
      *
      * @throws \RelayPay\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \RelayPay\Model\PageEcommerceMerchantTransaction|\RelayPay\Model\PageEcommerceMerchantTransaction|\RelayPay\Model\PageEcommerceMerchantTransaction, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getMerchantTxsWithHttpInfo($x_api_key, $x_merchant_id, $pageable, string $contentType = self::contentTypes['getMerchantTxs'][0])
+    public function getMerchantTxsWithHttpInfo($x_api_key, $x_merchant_id, $page = '0', $size = '20', $sort = 'created:desc', string $contentType = self::contentTypes['getMerchantTxs'][0])
     {
-        $request = $this->getMerchantTxsRequest($x_api_key, $x_merchant_id, $pageable, $contentType);
+        $request = $this->getMerchantTxsRequest($x_api_key, $x_merchant_id, $page, $size, $sort, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -770,15 +774,17 @@ class ECommerceApi
      *
      * @param  string $x_api_key (required)
      * @param  string $x_merchant_id (required)
-     * @param  \RelayPay\Model\Pageable $pageable (required)
+     * @param  string $page (optional, default to '0')
+     * @param  string $size (optional, default to '20')
+     * @param  string $sort (optional, default to 'created:desc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantTxs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantTxsAsync($x_api_key, $x_merchant_id, $pageable, string $contentType = self::contentTypes['getMerchantTxs'][0])
+    public function getMerchantTxsAsync($x_api_key, $x_merchant_id, $page = '0', $size = '20', $sort = 'created:desc', string $contentType = self::contentTypes['getMerchantTxs'][0])
     {
-        return $this->getMerchantTxsAsyncWithHttpInfo($x_api_key, $x_merchant_id, $pageable, $contentType)
+        return $this->getMerchantTxsAsyncWithHttpInfo($x_api_key, $x_merchant_id, $page, $size, $sort, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -793,16 +799,18 @@ class ECommerceApi
      *
      * @param  string $x_api_key (required)
      * @param  string $x_merchant_id (required)
-     * @param  \RelayPay\Model\Pageable $pageable (required)
+     * @param  string $page (optional, default to '0')
+     * @param  string $size (optional, default to '20')
+     * @param  string $sort (optional, default to 'created:desc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantTxs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantTxsAsyncWithHttpInfo($x_api_key, $x_merchant_id, $pageable, string $contentType = self::contentTypes['getMerchantTxs'][0])
+    public function getMerchantTxsAsyncWithHttpInfo($x_api_key, $x_merchant_id, $page = '0', $size = '20', $sort = 'created:desc', string $contentType = self::contentTypes['getMerchantTxs'][0])
     {
         $returnType = '\RelayPay\Model\PageEcommerceMerchantTransaction';
-        $request = $this->getMerchantTxsRequest($x_api_key, $x_merchant_id, $pageable, $contentType);
+        $request = $this->getMerchantTxsRequest($x_api_key, $x_merchant_id, $page, $size, $sort, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -845,13 +853,15 @@ class ECommerceApi
      *
      * @param  string $x_api_key (required)
      * @param  string $x_merchant_id (required)
-     * @param  \RelayPay\Model\Pageable $pageable (required)
+     * @param  string $page (optional, default to '0')
+     * @param  string $size (optional, default to '20')
+     * @param  string $sort (optional, default to 'created:desc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantTxs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getMerchantTxsRequest($x_api_key, $x_merchant_id, $pageable, string $contentType = self::contentTypes['getMerchantTxs'][0])
+    public function getMerchantTxsRequest($x_api_key, $x_merchant_id, $page = '0', $size = '20', $sort = 'created:desc', string $contentType = self::contentTypes['getMerchantTxs'][0])
     {
 
         // verify the required parameter 'x_api_key' is set
@@ -868,12 +878,8 @@ class ECommerceApi
             );
         }
 
-        // verify the required parameter 'pageable' is set
-        if ($pageable === null || (is_array($pageable) && count($pageable) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $pageable when calling getMerchantTxs'
-            );
-        }
+
+
 
 
         $resourcePath = '/e-commerce/transaction/history';
@@ -885,12 +891,30 @@ class ECommerceApi
 
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $pageable,
-            'pageable', // param base name
-            'object', // openApiType
+            $page,
+            'page', // param base name
+            'string', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $size,
+            'size', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
         ) ?? []);
 
         // header params
@@ -966,15 +990,18 @@ class ECommerceApi
      * @param  string $x_merchant_id x_merchant_id (required)
      * @param  \DateTime $start_date start_date (required)
      * @param  \DateTime $end_date end_date (required)
+     * @param  string $page page (optional, default to '0')
+     * @param  string $size size (optional, default to '20')
+     * @param  string $sort sort (optional, default to 'created:desc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantWebhookLogs'] to see the possible values for this operation
      *
      * @throws \RelayPay\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \RelayPay\Model\MerchantWebhookLog[]|\RelayPay\Model\MerchantWebhookLog[]|\RelayPay\Model\MerchantWebhookLog[]
+     * @return \RelayPay\Model\PageMerchantWebhookLog|\RelayPay\Model\PageMerchantWebhookLog|\RelayPay\Model\PageMerchantWebhookLog
      */
-    public function getMerchantWebhookLogs($x_api_key, $x_merchant_id, $start_date, $end_date, string $contentType = self::contentTypes['getMerchantWebhookLogs'][0])
+    public function getMerchantWebhookLogs($x_api_key, $x_merchant_id, $start_date, $end_date, $page = '0', $size = '20', $sort = 'created:desc', string $contentType = self::contentTypes['getMerchantWebhookLogs'][0])
     {
-        list($response) = $this->getMerchantWebhookLogsWithHttpInfo($x_api_key, $x_merchant_id, $start_date, $end_date, $contentType);
+        list($response) = $this->getMerchantWebhookLogsWithHttpInfo($x_api_key, $x_merchant_id, $start_date, $end_date, $page, $size, $sort, $contentType);
         return $response;
     }
 
@@ -987,15 +1014,18 @@ class ECommerceApi
      * @param  string $x_merchant_id (required)
      * @param  \DateTime $start_date (required)
      * @param  \DateTime $end_date (required)
+     * @param  string $page (optional, default to '0')
+     * @param  string $size (optional, default to '20')
+     * @param  string $sort (optional, default to 'created:desc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantWebhookLogs'] to see the possible values for this operation
      *
      * @throws \RelayPay\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \RelayPay\Model\MerchantWebhookLog[]|\RelayPay\Model\MerchantWebhookLog[]|\RelayPay\Model\MerchantWebhookLog[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \RelayPay\Model\PageMerchantWebhookLog|\RelayPay\Model\PageMerchantWebhookLog|\RelayPay\Model\PageMerchantWebhookLog, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getMerchantWebhookLogsWithHttpInfo($x_api_key, $x_merchant_id, $start_date, $end_date, string $contentType = self::contentTypes['getMerchantWebhookLogs'][0])
+    public function getMerchantWebhookLogsWithHttpInfo($x_api_key, $x_merchant_id, $start_date, $end_date, $page = '0', $size = '20', $sort = 'created:desc', string $contentType = self::contentTypes['getMerchantWebhookLogs'][0])
     {
-        $request = $this->getMerchantWebhookLogsRequest($x_api_key, $x_merchant_id, $start_date, $end_date, $contentType);
+        $request = $this->getMerchantWebhookLogsRequest($x_api_key, $x_merchant_id, $start_date, $end_date, $page, $size, $sort, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1022,11 +1052,11 @@ class ECommerceApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\RelayPay\Model\MerchantWebhookLog[]' === '\SplFileObject') {
+                    if ('\RelayPay\Model\PageMerchantWebhookLog' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\RelayPay\Model\MerchantWebhookLog[]' !== 'string') {
+                        if ('\RelayPay\Model\PageMerchantWebhookLog' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1044,16 +1074,16 @@ class ECommerceApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\RelayPay\Model\MerchantWebhookLog[]', []),
+                        ObjectSerializer::deserialize($content, '\RelayPay\Model\PageMerchantWebhookLog', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 401:
-                    if ('\RelayPay\Model\MerchantWebhookLog[]' === '\SplFileObject') {
+                    if ('\RelayPay\Model\PageMerchantWebhookLog' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\RelayPay\Model\MerchantWebhookLog[]' !== 'string') {
+                        if ('\RelayPay\Model\PageMerchantWebhookLog' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1071,16 +1101,16 @@ class ECommerceApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\RelayPay\Model\MerchantWebhookLog[]', []),
+                        ObjectSerializer::deserialize($content, '\RelayPay\Model\PageMerchantWebhookLog', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\RelayPay\Model\MerchantWebhookLog[]' === '\SplFileObject') {
+                    if ('\RelayPay\Model\PageMerchantWebhookLog' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\RelayPay\Model\MerchantWebhookLog[]' !== 'string') {
+                        if ('\RelayPay\Model\PageMerchantWebhookLog' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1098,7 +1128,7 @@ class ECommerceApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\RelayPay\Model\MerchantWebhookLog[]', []),
+                        ObjectSerializer::deserialize($content, '\RelayPay\Model\PageMerchantWebhookLog', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1117,7 +1147,7 @@ class ECommerceApi
                 );
             }
 
-            $returnType = '\RelayPay\Model\MerchantWebhookLog[]';
+            $returnType = '\RelayPay\Model\PageMerchantWebhookLog';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1150,7 +1180,7 @@ class ECommerceApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\RelayPay\Model\MerchantWebhookLog[]',
+                        '\RelayPay\Model\PageMerchantWebhookLog',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1158,7 +1188,7 @@ class ECommerceApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\RelayPay\Model\MerchantWebhookLog[]',
+                        '\RelayPay\Model\PageMerchantWebhookLog',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1166,7 +1196,7 @@ class ECommerceApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\RelayPay\Model\MerchantWebhookLog[]',
+                        '\RelayPay\Model\PageMerchantWebhookLog',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1185,14 +1215,17 @@ class ECommerceApi
      * @param  string $x_merchant_id (required)
      * @param  \DateTime $start_date (required)
      * @param  \DateTime $end_date (required)
+     * @param  string $page (optional, default to '0')
+     * @param  string $size (optional, default to '20')
+     * @param  string $sort (optional, default to 'created:desc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantWebhookLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantWebhookLogsAsync($x_api_key, $x_merchant_id, $start_date, $end_date, string $contentType = self::contentTypes['getMerchantWebhookLogs'][0])
+    public function getMerchantWebhookLogsAsync($x_api_key, $x_merchant_id, $start_date, $end_date, $page = '0', $size = '20', $sort = 'created:desc', string $contentType = self::contentTypes['getMerchantWebhookLogs'][0])
     {
-        return $this->getMerchantWebhookLogsAsyncWithHttpInfo($x_api_key, $x_merchant_id, $start_date, $end_date, $contentType)
+        return $this->getMerchantWebhookLogsAsyncWithHttpInfo($x_api_key, $x_merchant_id, $start_date, $end_date, $page, $size, $sort, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1209,15 +1242,18 @@ class ECommerceApi
      * @param  string $x_merchant_id (required)
      * @param  \DateTime $start_date (required)
      * @param  \DateTime $end_date (required)
+     * @param  string $page (optional, default to '0')
+     * @param  string $size (optional, default to '20')
+     * @param  string $sort (optional, default to 'created:desc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantWebhookLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantWebhookLogsAsyncWithHttpInfo($x_api_key, $x_merchant_id, $start_date, $end_date, string $contentType = self::contentTypes['getMerchantWebhookLogs'][0])
+    public function getMerchantWebhookLogsAsyncWithHttpInfo($x_api_key, $x_merchant_id, $start_date, $end_date, $page = '0', $size = '20', $sort = 'created:desc', string $contentType = self::contentTypes['getMerchantWebhookLogs'][0])
     {
-        $returnType = '\RelayPay\Model\MerchantWebhookLog[]';
-        $request = $this->getMerchantWebhookLogsRequest($x_api_key, $x_merchant_id, $start_date, $end_date, $contentType);
+        $returnType = '\RelayPay\Model\PageMerchantWebhookLog';
+        $request = $this->getMerchantWebhookLogsRequest($x_api_key, $x_merchant_id, $start_date, $end_date, $page, $size, $sort, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1262,12 +1298,15 @@ class ECommerceApi
      * @param  string $x_merchant_id (required)
      * @param  \DateTime $start_date (required)
      * @param  \DateTime $end_date (required)
+     * @param  string $page (optional, default to '0')
+     * @param  string $size (optional, default to '20')
+     * @param  string $sort (optional, default to 'created:desc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantWebhookLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getMerchantWebhookLogsRequest($x_api_key, $x_merchant_id, $start_date, $end_date, string $contentType = self::contentTypes['getMerchantWebhookLogs'][0])
+    public function getMerchantWebhookLogsRequest($x_api_key, $x_merchant_id, $start_date, $end_date, $page = '0', $size = '20', $sort = 'created:desc', string $contentType = self::contentTypes['getMerchantWebhookLogs'][0])
     {
 
         // verify the required parameter 'x_api_key' is set
@@ -1299,6 +1338,9 @@ class ECommerceApi
         }
 
 
+
+
+
         $resourcePath = '/e-commerce/transaction/webhooks';
         $formParams = [];
         $queryParams = [];
@@ -1323,6 +1365,33 @@ class ECommerceApi
             'form', // style
             true, // explode
             true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $size,
+            'size', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
         ) ?? []);
 
         // header params
