@@ -732,7 +732,7 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
     {
         return json_encode(
             ObjectSerializer::sanitizeForSerialization($this),
-            JSON_PRETTY_PRINT
+            
         );
     }
 

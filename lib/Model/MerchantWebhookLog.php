@@ -665,7 +665,7 @@ class MerchantWebhookLog implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         return json_encode(
             ObjectSerializer::sanitizeForSerialization($this),
-            JSON_PRETTY_PRINT
+            
         );
     }
 
