@@ -283,24 +283,16 @@
                     "in": "header",
                     "description": "SHA 256 signature of the payload sent.",
                     "required": true,
-                    "content": {
-                      "text/plain": {
-                        "schema": {
-                          "type": "string"
-                        }
-                      }
+                    "schema": {
+                      "type": "string"
                     }
                   },
                   {
                     "name": "Authorisation",
                     "in": "header",
                     "description": "Authorisation string supplied by the e-commerce request (optional) or in the case of salesforce integration the salesforce security token is provided",
-                    "content": {
-                      "text/plain": {
-                        "schema": {
-                          "type": "string"
-                        }
-                      }
+                    "schema": {
+                      "type": "string"
                     }
                   }
                 ],
@@ -617,7 +609,11 @@
       },
       "EcommerceIncomingRequest": {
         "required": [
-          "callbackUrlRedirect"
+          "amount",
+          "currency",
+          "customerEmail",
+          "orderId",
+          "storeName"
         ],
         "type": "object",
         "properties": {
@@ -849,12 +845,12 @@
           "sort": {
             "$ref": "#/components/schemas/SortObject"
           },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          },
           "numberOfElements": {
             "type": "integer",
             "format": "int32"
-          },
-          "pageable": {
-            "$ref": "#/components/schemas/Pageable"
           },
           "first": {
             "type": "boolean"
@@ -899,10 +895,10 @@
           "empty": {
             "type": "boolean"
           },
-          "sorted": {
+          "unsorted": {
             "type": "boolean"
           },
-          "unsorted": {
+          "sorted": {
             "type": "boolean"
           }
         }
@@ -935,12 +931,12 @@
           "sort": {
             "$ref": "#/components/schemas/SortObject"
           },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          },
           "numberOfElements": {
             "type": "integer",
             "format": "int32"
-          },
-          "pageable": {
-            "$ref": "#/components/schemas/Pageable"
           },
           "first": {
             "type": "boolean"

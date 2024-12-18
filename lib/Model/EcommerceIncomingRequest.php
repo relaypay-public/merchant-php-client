@@ -339,8 +339,20 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     {
         $invalidProperties = [];
 
-        if ($this->container['callback_url_redirect'] === null) {
-            $invalidProperties[] = "'callback_url_redirect' can't be null";
+        if ($this->container['amount'] === null) {
+            $invalidProperties[] = "'amount' can't be null";
+        }
+        if ($this->container['customer_email'] === null) {
+            $invalidProperties[] = "'customer_email' can't be null";
+        }
+        if ($this->container['store_name'] === null) {
+            $invalidProperties[] = "'store_name' can't be null";
+        }
+        if ($this->container['currency'] === null) {
+            $invalidProperties[] = "'currency' can't be null";
+        }
+        if ($this->container['order_id'] === null) {
+            $invalidProperties[] = "'order_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -360,7 +372,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets amount
      *
-     * @return float|null
+     * @return float
      */
     public function getAmount()
     {
@@ -370,7 +382,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float $amount amount
      *
      * @return self
      */
@@ -414,7 +426,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets customer_email
      *
-     * @return string|null
+     * @return string
      */
     public function getCustomerEmail()
     {
@@ -424,7 +436,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets customer_email
      *
-     * @param string|null $customer_email customer_email
+     * @param string $customer_email customer_email
      *
      * @return self
      */
@@ -441,7 +453,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets store_name
      *
-     * @return string|null
+     * @return string
      */
     public function getStoreName()
     {
@@ -451,7 +463,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets store_name
      *
-     * @param string|null $store_name store_name
+     * @param string $store_name store_name
      *
      * @return self
      */
@@ -468,7 +480,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets currency
      *
-     * @return string|null
+     * @return string
      */
     public function getCurrency()
     {
@@ -478,7 +490,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets currency
      *
-     * @param string|null $currency currency
+     * @param string $currency currency
      *
      * @return self
      */
@@ -495,7 +507,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets order_id
      *
-     * @return string|null
+     * @return string
      */
     public function getOrderId()
     {
@@ -505,7 +517,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets order_id
      *
-     * @param string|null $order_id order_id
+     * @param string $order_id order_id
      *
      * @return self
      */
@@ -522,7 +534,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets callback_url_redirect
      *
-     * @return string
+     * @return string|null
      */
     public function getCallbackUrlRedirect()
     {
@@ -532,7 +544,7 @@ class EcommerceIncomingRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets callback_url_redirect
      *
-     * @param string $callback_url_redirect Where to redirect once the payment is pending or cancelled. If this value is provided it'll override the general settings.
+     * @param string|null $callback_url_redirect Where to redirect once the payment is pending or cancelled. If this value is provided it'll override the general settings.
      *
      * @return self
      */

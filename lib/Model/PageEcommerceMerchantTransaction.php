@@ -64,8 +64,8 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => '\RelayPay\Model\EcommerceMerchantTransaction[]',
         'number' => 'int',
         'sort' => '\RelayPay\Model\SortObject',
-        'number_of_elements' => 'int',
         'pageable' => '\RelayPay\Model\Pageable',
+        'number_of_elements' => 'int',
         'first' => 'bool',
         'last' => 'bool',
         'empty' => 'bool'
@@ -85,8 +85,8 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => null,
         'number' => 'int32',
         'sort' => null,
-        'number_of_elements' => 'int32',
         'pageable' => null,
+        'number_of_elements' => 'int32',
         'first' => null,
         'last' => null,
         'empty' => null
@@ -104,8 +104,8 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => false,
         'number' => false,
         'sort' => false,
-        'number_of_elements' => false,
         'pageable' => false,
+        'number_of_elements' => false,
         'first' => false,
         'last' => false,
         'empty' => false
@@ -203,8 +203,8 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => 'content',
         'number' => 'number',
         'sort' => 'sort',
-        'number_of_elements' => 'numberOfElements',
         'pageable' => 'pageable',
+        'number_of_elements' => 'numberOfElements',
         'first' => 'first',
         'last' => 'last',
         'empty' => 'empty'
@@ -222,8 +222,8 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => 'setContent',
         'number' => 'setNumber',
         'sort' => 'setSort',
-        'number_of_elements' => 'setNumberOfElements',
         'pageable' => 'setPageable',
+        'number_of_elements' => 'setNumberOfElements',
         'first' => 'setFirst',
         'last' => 'setLast',
         'empty' => 'setEmpty'
@@ -241,8 +241,8 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         'content' => 'getContent',
         'number' => 'getNumber',
         'sort' => 'getSort',
-        'number_of_elements' => 'getNumberOfElements',
         'pageable' => 'getPageable',
+        'number_of_elements' => 'getNumberOfElements',
         'first' => 'getFirst',
         'last' => 'getLast',
         'empty' => 'getEmpty'
@@ -311,8 +311,8 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
         $this->setIfExists('content', $data ?? [], null);
         $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('sort', $data ?? [], null);
-        $this->setIfExists('number_of_elements', $data ?? [], null);
         $this->setIfExists('pageable', $data ?? [], null);
+        $this->setIfExists('number_of_elements', $data ?? [], null);
         $this->setIfExists('first', $data ?? [], null);
         $this->setIfExists('last', $data ?? [], null);
         $this->setIfExists('empty', $data ?? [], null);
@@ -523,33 +523,6 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
     }
 
     /**
-     * Gets number_of_elements
-     *
-     * @return int|null
-     */
-    public function getNumberOfElements()
-    {
-        return $this->container['number_of_elements'];
-    }
-
-    /**
-     * Sets number_of_elements
-     *
-     * @param int|null $number_of_elements number_of_elements
-     *
-     * @return self
-     */
-    public function setNumberOfElements($number_of_elements)
-    {
-        if (is_null($number_of_elements)) {
-            throw new \InvalidArgumentException('non-nullable number_of_elements cannot be null');
-        }
-        $this->container['number_of_elements'] = $number_of_elements;
-
-        return $this;
-    }
-
-    /**
      * Gets pageable
      *
      * @return \RelayPay\Model\Pageable|null
@@ -572,6 +545,33 @@ class PageEcommerceMerchantTransaction implements ModelInterface, ArrayAccess, \
             throw new \InvalidArgumentException('non-nullable pageable cannot be null');
         }
         $this->container['pageable'] = $pageable;
+
+        return $this;
+    }
+
+    /**
+     * Gets number_of_elements
+     *
+     * @return int|null
+     */
+    public function getNumberOfElements()
+    {
+        return $this->container['number_of_elements'];
+    }
+
+    /**
+     * Sets number_of_elements
+     *
+     * @param int|null $number_of_elements number_of_elements
+     *
+     * @return self
+     */
+    public function setNumberOfElements($number_of_elements)
+    {
+        if (is_null($number_of_elements)) {
+            throw new \InvalidArgumentException('non-nullable number_of_elements cannot be null');
+        }
+        $this->container['number_of_elements'] = $number_of_elements;
 
         return $this;
     }
